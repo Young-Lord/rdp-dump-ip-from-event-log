@@ -11,7 +11,7 @@ $xml='<QueryList>
 $result=Get-WinEvent -FilterXml $xml -MaxEvents 100 | ForEach-Object {
     $eventXml = ([xml]$_.ToXml()).Event
     [PsCustomObject]@{
-        time=$_.TimeCreated
+        Time=$_.TimeCreated
         TargetUserName = ($eventXml.EventData.Data | Where-Object { $_.Name -eq 'TargetUserName' }).'#text'
         IpAddress = ($eventXml.EventData.Data | Where-Object { $_.Name -eq 'IpAddress' }).'#text'
         WorkstationName = ($eventXml.EventData.Data | Where-Object { $_.Name -eq 'WorkstationName' }).'#text'
@@ -19,4 +19,4 @@ $result=Get-WinEvent -FilterXml $xml -MaxEvents 100 | ForEach-Object {
     }
 }
 
-$result | Sort-Object -Property time | Format-Table
+$result | Sort-Object -Property Time | Format-Table
