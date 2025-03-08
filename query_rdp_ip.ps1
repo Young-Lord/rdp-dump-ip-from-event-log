@@ -19,4 +19,4 @@ $result=Get-WinEvent -FilterXml $xml -MaxEvents 100 | ForEach-Object {
     }
 }
 
-$result | Format-Table
+$result | Sort-Object -Property time | Format-Table
